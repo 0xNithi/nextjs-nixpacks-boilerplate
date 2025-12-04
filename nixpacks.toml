@@ -1,2 +1,8 @@
 [phases.setup]
 providers = ["nodejs_24"]
+
+[phases.install]
+onlyIncludeFiles = [
+  "package.json",
+  "bun.lock",
+]
