@@ -1,0 +1,33 @@
+name: Build with Nixpacks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build with Nixpacks
+        uses: iloveitaly/github-action-nixpacks@main
+        with:
+          push: true
+          tags: ghcr.io/0xnithi/nextjs-nixpacks-boilerplate:latest
+          context: .
+          pkgs: nodejs_24
+          cache: true
+        env:
+          NIXPACKS_NODE_VERSION: "24"
