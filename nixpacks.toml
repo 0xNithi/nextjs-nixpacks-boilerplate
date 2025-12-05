@@ -6,3 +6,10 @@ onlyIncludeFiles = [
   "package.json",
   "bun.lock",
 ]
+
+[start]
+cmd = "bun .next/standalone/server.js"
+runImage = "oven/bun"
+onlyIncludeFiles = [
+  ".next",
+]
